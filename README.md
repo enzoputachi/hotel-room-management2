@@ -1,7 +1,5 @@
 # hotel-user-management2
 
-Sure, here's the README converted to markdown format:
-
 ```markdown
 # Room Management System
 
