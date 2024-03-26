@@ -6,16 +6,26 @@ const User = require('../models/userModel');
 const authenticateUser = async (req, res, next) => {
     try {
         // Extract token from authorization header
-        const token = req.headers.authorization.split(' ')[1];
+        const testToken = req.headers.authorization || req.headers.Authorization
+        let token;
+        if (testToken && testToken.startsWith('Bearer')) {
+
+            token = testToken.split(' ')[1];
+        }
+        if (!token) {
+            throw new Error('token not found');
+        }
         // Verify token and decode user information
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         // Find user by decoded userId
-        const user = await User.findById(decoded.userId);
-        if (!user) {
-            throw new Error('User not found');
+        const authorized = decoded.role
+        if (authorized !== 'admin') {
+            throw new Error('unauthorized');
         }
+        console.log(authorized);
+        
         // Attach user to request object
-        req.user = user;
+        req.user = decoded;
         next();
     } catch (error) {
         res.status(401).json({ message: 'Authentication failed' });

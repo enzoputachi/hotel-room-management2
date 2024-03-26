@@ -17,7 +17,7 @@ exports.createRoomType = async (req, res) => {
 exports.getAllRoomTypes = async (req, res) => {
     try {
         // Find all room types in the database
-        const roomTypes = await RoomType.find();
+        const roomTypes = await RoomType.find(req.body);
         // Send a success response with all room types
         res.status(200).json(roomTypes);
     } catch (error) {

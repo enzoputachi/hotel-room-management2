@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const RoomTypeSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Room type name is required']
+        required: [true, 'Room type name is required'],
+        unique: true
     }
 });
 

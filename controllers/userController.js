@@ -6,14 +6,20 @@ const bcrypt = require('bcrypt');
 // Create a new User
 exports.createUser = async (req, res) => {
     try {
+        console.log("Received password:", req.body.password);
+
+        // Hash the password
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+       // Create the user object with hashed password
         const user = await User.create({
             username: req.body.username,
             email: req.body.email,
             password: hashedPassword,
             role: req.body.role
         });
-        res.status(201).json({ user });
+
+        res.status(201).json(user);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -34,10 +40,10 @@ exports.authenticateUser = async (req, res) => {
         }
 
         // If username and password are valid, create JWT token
-        const token = jwt.sign({ userId: user._id, username: user.username, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
         // Send the token along with user information
-        res.status(200).json({ user, token });
+        res.status(200).json({ message: 'user successfully logged in', user, token });
     } catch (error) {
         res.status(401).json({ message: error.message });
     }
