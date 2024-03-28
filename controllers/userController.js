@@ -62,6 +62,19 @@ exports.getUserProfile = async (req, res) => {
     }
 };
 
+// Retrieve all users
+exports.getAllUsers = async (req, res) => {
+    try {
+        // Find all users in the database
+        const users = await User.find(req.body);
+        // Send a success response with all users
+        res.status(200).json(users);
+    } catch (error) {
+        // Send an error response if something went wrong
+        res.status(500).json({ error: error.message });
+    }
+};
+
 // Update User Profile
 exports.updateUserProfile = async (req, res) => {
     try {

@@ -5,12 +5,15 @@ const { validateUserData } = require('../middlewares/userValidation');
 const { authenticateUser } = require('../middlewares/authMiddleware');
 
 // Route to create a new user
-router.post('/create', userController.createUser);
+router.post('/', userController.createUser);
 
 // Route to authenticate a user
 router.post('/login', userController.authenticateUser);
 
-// Route to retrieve user profile
+// Route to get all users
+router.get('/', userController.getAllUsers);
+
+// Route to retrieve user profile by id
 router.get('/:userId', userController.getUserProfile);
 
 // Route to update user profile

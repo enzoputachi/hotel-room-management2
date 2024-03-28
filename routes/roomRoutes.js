@@ -5,18 +5,18 @@ const roomController = require('../controllers/roomController');
 const { validateRequest } = require('../middlewares/roomValidation');
 
 // Create a new room
-router.post('/create', validateRequest, roomController.createRoom);
+router.post('/', validateRequest, roomController.createRoom);
 
 // Retrieve all rooms
-router.get('/all', roomController.getAllRooms);
+router.get('/', roomController.getAllRooms);
 
 // Retrieve a specific room by its ID
-router.get('/:roomId', roomController.getRoomById);
+router.get('/', roomController.getRoomById);
 
 // Update a specific room by its ID
-router.patch('/:roomId', validateRequest, roomController.updateRoom);
+router.patch('/', validateRequest, roomController.updateRoom);
 
 //Delete a specific room by its ID
-router.delete('/:deleteId', roomController.deleteRoom);
+router.delete('/', roomController.deleteRoom);
 
 module.exports = router;
