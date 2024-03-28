@@ -10,7 +10,7 @@ const { validateRequest } = require('./middlewares/roomValidation');
 const { validateUserDate } = require('./middlewares/userValidation');
 
 const app = express();
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 4009;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 // Middleware
