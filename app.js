@@ -17,9 +17,9 @@ const MONGODB_URI = process.env.MONGODB_URI;
 app.use(express.json());
 
 // Routes
-app.use('/', validateRequest, roomTypeRoutes); // Use roomType routes
-app.use('/', validateRequest, roomRoutes); // Use room routes
-app.use('/', userRoutes); // Use user routes validateUserDate,
+app.use('/api/v1/room-types', validateRequest, roomTypeRoutes); // Use roomType routes
+app.use('/api/v1/rooms', validateRequest, roomRoutes); // Use room routes
+app.use('/api/v1/users', userRoutes); // Use user routes validateUserDate,
 
 // Connect to MongoDB and start server
 mongoose.connect(MONGODB_URI)
